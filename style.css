@@ -1,17 +1,17 @@
-body,
-html {
+/* Base styles */
+body {
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: black;
   font-family: Arial, sans-serif;
+  overflow: hidden;
+  background: #000;
 }
 
-canvas {
-  display: block;
+#spaceCanvas {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 #content {
@@ -23,43 +23,74 @@ canvas {
   text-align: center;
 }
 
-#content h1 {
-  font-size: 48px;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
-
 #buttons {
   margin-top: 20px;
 }
 
-#buttons a {
+#buttons img {
+  width: 100px;
+  height: auto;
   margin: 0 10px;
 }
 
-#buttons img {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.3s;
-}
-
-#buttons img:hover {
-  transform: scale(1.1);
-}
-
-#musicControls {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-}
-
 #bottomImage {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 10px;
-    cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 50px;
+  height: auto;
+}
+
+#settingsToggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#settingsPanel {
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 2;
+}
+
+#settingsPanel h2 {
+  margin-top: 0;
+}
+
+#settingsPanel label {
+  display: block;
+  margin: 5px 0;
+}
+
+#settingsPanel input[type="range"] {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  #buttons img {
+    width: 150px;
+  }
+
+  #bottomImage {
+    width: 75px;
+  }
+}
+
+@media (min-width: 992px) {
+  #buttons img {
+    width: 50px;
+  }
+
+  #bottomImage {
+    width: 100px;
+  }
 }
