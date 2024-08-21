@@ -10,10 +10,22 @@
     <canvas id="spaceCanvas"></canvas>
 
     <div id="content">
-        <h1>Welcome, welcome! This is a test site for now so dont worry about anything!</h1>
+        <h1>Welcome, welcome! This is a test site for now so don't worry about anything!</h1>
         <div id="buttons">
             <a href="https://open.spotify.com/user/xbmlmkqmekj26al861jpytjnx">
-                <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image1.png?raw=true" alt="button">
+                <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image6.png?raw=true" alt="spotify">
+            </a>
+            <a href="https://www.roblox.com/users/3954375364/profile">
+                <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image2.png?raw=true" alt="roblox">
+            </a>
+            <a href="https://discord.gg/426VU45P">
+                <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image3.png?raw=true" alt="discord">
+            </a>
+            <a href="https://steamcommunity.com/id/LokoBurrito/">
+              <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image4.png?raw=true" alt="Steam">
+            </a>
+            <a href="https://x.com/lokoburritoreal">
+              <img src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image5.png?raw=true" alt="X account">
             </a>
         </div>
     </div>
@@ -22,12 +34,15 @@
         <source src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/Holiday%20Core.mp3?raw=true" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <audio id="clickSound" src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/Aww%20Sound%20Effect.mp3?raw=true"></audio>
 
     <div id="musicControls">
         <button onclick="togglePlay()">Play/Pause</button>
         <label for="volumeControl">Volume: </label>
         <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" onchange="changeVolume(this.value)">
     </div>
+    
+    <img id="bottomImage" src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/shrink.png?raw=true" alt="is me">
 
     <script src="script.js"></script>
 </body>
