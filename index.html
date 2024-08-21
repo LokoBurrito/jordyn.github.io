@@ -32,11 +32,6 @@
       </div>
     </div>
 
-    <div id="discord-presence">
-      <h2>Discord Presence</h2>
-      <p id="discord-status">Loading...</p>
-    </div>
-
     <audio id="backgroundMusic" autoplay loop>
       <source src="https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/Holiday%20Core.mp3?raw=true" type="audio/mpeg">
       Your browser does not support the audio element.
@@ -61,7 +56,11 @@
         <button onclick="togglePlay()">Play/Pause</button>
         <label for="volumeControl">Volume: </label>
         <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" onchange="changeVolume(this.value)">
-
+      </div>
+      <div>
+        <h3>Background</h3>
+        <label for="snowAmount">Snow Amount:</label>
+        <input type="range" id="snowAmount" min="10" max="200" value="100">
       </div>
     </div>
 
