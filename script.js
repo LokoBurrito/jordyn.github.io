@@ -1,17 +1,20 @@
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 let stars = [];
 let particles = [];
 let heartParticles = [];
+
 const backgroundMusic = document.getElementById('backgroundMusic');
+
 const particleSound = new Audio('https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/explosion.wav?raw=true');
 particleSound.volume = 0.5;
-const clickSound = document.getElementById('clickSound');
-const heartImage = new Image();
-heartImage.src = 'https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image7.png?raw=true';
-const bottomImage = document.getElementById('bottomImage');
+
+const clickSound = new Audio('https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/Aww%20Sound%20Effect.mp3?raw=true');
+clickSound.volume = 0.5;
 
 function Star(x, y) {
   this.x = x;
@@ -22,7 +25,7 @@ function Star(x, y) {
 }
 
 Star.prototype.update = function() {
-  this.y += this.speed;
+  this.y += this.speed * backgroundSpeed;
   if (this.y > canvas.height) {
     this.y = 0;
   }
@@ -127,19 +130,13 @@ canvas.addEventListener('click', (event) => {
   }
 });
 
-bottomImage.addEventListener('click', (event) => {
+document.getElementById('bottomImage').addEventListener('click', (event) => {
+
   clickSound.play();
 
   for (let i = 0; i < 20; i++) {
     heartParticles.push(new Particle(event.clientX, event.clientY, heartImage));
   }
-
-  bottomImage.style.transition = 'transform 0.3s ease';
-  bottomImage.style.transform = 'scale(0.5)';
-
-  setTimeout(() => {
-    bottomImage.style.transform = 'scale(1)';
-  }, 500);
 });
 
 window.addEventListener('resize', () => {
@@ -160,6 +157,17 @@ function togglePlay() {
 function changeVolume(volume) {
   backgroundMusic.volume = volume;
 }
+
+let backgroundSpeed = 1;
+document.getElementById('backgroundSpeed').addEventListener('input', (event) => {
+  backgroundSpeed = event.target.value;
+});
+
+function toggleSettings() {
+  const panel = document.getElementById('settingsPanel');
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
 
 createStars();
 animate();
