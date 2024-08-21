@@ -1,13 +1,17 @@
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 let stars = [];
 let particles = [];
-
+let heartParticles = [];
 const backgroundMusic = document.getElementById('backgroundMusic');
+const particleSound = new Audio('https://github.com/LokoBurrito/jordyn.github.io/blob/main/music/explosion.wav?raw=true');
+particleSound.volume = 0.5;
+const clickSound = document.getElementById('clickSound');
+const heartImage = new Image();
+heartImage.src = 'https://github.com/LokoBurrito/jordyn.github.io/blob/main/images/image7.png?raw=true';
+const bottomImage = document.getElementById('bottomImage');
 
 function Star(x, y) {
   this.x = x;
@@ -31,13 +35,14 @@ Star.prototype.draw = function() {
   ctx.fill();
 };
 
-function Particle(x, y) {
+function Particle(x, y, image = null) {
   this.x = x;
   this.y = y;
   this.size = Math.random() * 3 + 1;
   this.speedX = Math.random() * 3 - 1.5;
   this.speedY = Math.random() * 3 - 1.5;
   this.opacity = 1;
+  this.image = image;
 }
 
 Particle.prototype.update = function() {
@@ -51,10 +56,14 @@ Particle.prototype.update = function() {
 
 Particle.prototype.draw = function() {
   ctx.globalAlpha = this.opacity;
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-  ctx.fillStyle = 'white';
-  ctx.fill();
+  if (this.image) {
+    ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+  } else {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+  }
   ctx.globalAlpha = 1;
 };
 
@@ -76,9 +85,26 @@ function isStarInText(star) {
   return star.x > rectLeft && star.x < rectRight && star.y > rectTop && star.y < rectBottom;
 }
 
+function handleParticles() {
+  particles.forEach((particle, index) => {
+    particle.update();
+    particle.draw();
+    if (particle.opacity <= 0) {
+      particles.splice(index, 1);
+    }
+  });
+
+  heartParticles.forEach((heartParticle, index) => {
+    heartParticle.update();
+    heartParticle.draw();
+    if (heartParticle.opacity <= 0) {
+      heartParticles.splice(index, 1);
+    }
+  });
+}
+
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   stars.forEach(star => {
     star.update();
     if (isStarInText(star)) {
@@ -88,22 +114,32 @@ function animate() {
     }
     star.draw();
   });
-
-  particles.forEach((particle, index) => {
-    particle.update();
-    particle.draw();
-    if (particle.opacity <= 0) {
-      particles.splice(index, 1);
-    }
-  });
-
+  handleParticles();
   requestAnimationFrame(animate);
 }
 
 canvas.addEventListener('click', (event) => {
+
+  particleSound.play();
+
   for (let i = 0; i < 20; i++) {
     particles.push(new Particle(event.clientX, event.clientY));
   }
+});
+
+bottomImage.addEventListener('click', (event) => {
+  clickSound.play();
+
+  for (let i = 0; i < 20; i++) {
+    heartParticles.push(new Particle(event.clientX, event.clientY, heartImage));
+  }
+
+  bottomImage.style.transition = 'transform 0.3s ease';
+  bottomImage.style.transform = 'scale(0.5)';
+
+  setTimeout(() => {
+    bottomImage.style.transform = 'scale(1)';
+  }, 500);
 });
 
 window.addEventListener('resize', () => {
