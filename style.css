@@ -55,3 +55,11 @@ canvas {
   transform: translateX(-50%);
   color: white;
 }
+
+#bottomImage {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 10px;
+    cursor: pointer;
+}
