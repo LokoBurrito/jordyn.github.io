@@ -168,6 +168,22 @@ function toggleSettings() {
   panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
 }
 
+const snowAmountSlider = document.getElementById('snowAmount');
 
+function adjustStars() {
+    const snowAmount = parseInt(snowAmountSlider.value, 10);
+
+    stars = [];
+
+    for (let i = 0; i < snowAmount; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        stars.push(new Star(x, y));
+    }
+}
+
+snowAmountSlider.addEventListener('input', adjustStars);
+
+adjustStars();
 createStars();
 animate();
